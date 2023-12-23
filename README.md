@@ -95,6 +95,9 @@ The personal details of your custom rules are also ignored by git.
 ### Why is the category "Maybe..."
 Plaid categorizes transactions and includes a degree of confidence in the categorization. If the confidence is low, Mercury will prepend "Maybe..." to the category to indicate deeper review is necessary. Edit the category manually in Google Sheets, and optionally add a Custom Rule if the merchant frequently has this issue.
 
+### Does Mercury support Apple Card
+No, Apple Card does not work with Plaid and so it is not available with Mercury. Instead, I manually enter the transaction details and skip setting a Transaction ID.
+
 ## Reference
 
 - [Plaid Category Hierarchy CSV](https://plaid.com/documents/transactions-personal-finance-category-taxonomy.csv)
