@@ -8,7 +8,7 @@ const maxValue = 100_000;
 export const config: Config = {
   startDate: '2023-12-01',
   endDate: '2023-12-31',
-  maxValueToInclude: 60,
+  maxValueToInclude: maxValue, // or 60 for 60 dollars,
   spreadsheetTabName: currentMonth, // Or 'Nov'
   spreadsheetId: process.env.SHEETS_SPREADSHEET_ID || '',
   googleCredentials: {
