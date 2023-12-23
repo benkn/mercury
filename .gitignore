@@ -1,0 +1,13 @@
+# Project specific things
+src/config/accounts.ts
+src/etl/customRules.ts
+ssl/
+.env
+
+# Node things
+node_modules/
+build/
+dist/
+
+# Mac stuff
+.DS_Store
