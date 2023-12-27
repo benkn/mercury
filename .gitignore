@@ -4,6 +4,8 @@ src/etl/customRules.ts
 ssl/
 .env
 
+log.json
+
 # Node things
 node_modules/
 build/

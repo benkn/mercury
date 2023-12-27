@@ -1,6 +1,7 @@
 import { Configuration, PlaidApi, PlaidEnvironments, Transaction, TransactionsGetRequest } from 'plaid';
 import Logger from '../../util/logger-console';
 import { Account, config } from '../../config';
+import fs from 'fs';
 
 export class PlaidClient {
   private configuration: Configuration;
@@ -45,8 +46,17 @@ export class PlaidClient {
     const { total_transactions, transactions } = response.data;
 
     Logger.info(`Received ${total_transactions} transactions. Filtering based on configuration.`);
-    const dateFiltered = transactions.filter((t) => t.date >= startDate);
-    Logger.debug(`${dateFiltered.length} transactions after the date filter`);
-    return dateFiltered.filter((t) => t.amount <= config.maxValueToInclude || t.amount >= 1000);
+    if (total_transactions > 0) {
+      // logTransactions(JSON.stringify(transactions, null, 2), 'log.json');
+    }
+    return transactions
+      .filter((t) => t.pending === false) // skip any pending transactions
+      .filter((t) => t.amount <= config.maxValueToInclude || t.amount >= 1000);
   };
+}
+
+function logTransactions(content: string, file: fs.PathOrFileDescriptor) {
+  const now = new Date().toISOString();
+  fs.appendFileSync(file, `"${now}",\n`);
+  fs.appendFileSync(file, content);
 }
