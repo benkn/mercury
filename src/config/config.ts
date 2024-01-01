@@ -1,3 +1,5 @@
+import { decideDateRange } from '../util/decideDateRange';
+
 // read env vars from .env file
 import * as dotenv from 'dotenv';
 dotenv.config({ path: './.env' });
@@ -5,11 +7,12 @@ dotenv.config({ path: './.env' });
 const currentMonth = 'This_Month';
 const maxValue = 100_000;
 
+const dateRange = decideDateRange(new Date());
+
 export const config: Config = {
-  startDate: '2023-12-01',
-  endDate: '2023-12-31',
+  ...dateRange,
   maxValueToInclude: maxValue, // or 60 for 60 dollars,
-  spreadsheetTabName: currentMonth, // Or 'Nov'
+  spreadsheetTabName: currentMonth, // Or 'Nov',
   spreadsheetId: process.env.SHEETS_SPREADSHEET_ID || '',
   googleCredentials: {
     private_key: process.env.SHEETS_PRIVATE_KEY,
