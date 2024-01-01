@@ -8,6 +8,7 @@ import { authentication } from './services/google/authenticate';
 import { PlaidClient } from './services/plaid/plaidClient';
 import Logger from './util/logger-console';
 import { filterExistingTransactions } from './services/google/filterExistingTransactions';
+import { findRemovedTransactions } from './services/google/findRemovedTransactions';
 
 async function main() {
   Logger.important(`Collecting transactions since ${config.startDate}`);
@@ -32,6 +33,7 @@ async function main() {
 
   Logger.info('Config says ID is ' + config.spreadsheetId);
 
+  await findRemovedTransactions(transactions, sheetsAuth, spreadsheetId, sheet);
   const newTransactions = await filterExistingTransactions(transactions, sheetsAuth, spreadsheetId, sheet);
 
   if (newTransactions.length === 0) {
