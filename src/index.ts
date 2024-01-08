@@ -31,8 +31,6 @@ async function main() {
   const spreadsheetId = config.spreadsheetId;
   const sheet = config.spreadsheetTabName;
 
-  Logger.info('Config says ID is ' + config.spreadsheetId);
-
   await findRemovedTransactions(transactions, sheetsAuth, spreadsheetId, sheet);
   const newTransactions = await filterExistingTransactions(transactions, sheetsAuth, spreadsheetId, sheet);
 
